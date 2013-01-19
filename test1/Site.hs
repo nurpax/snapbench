@@ -12,23 +12,19 @@ module Site
 import           Data.ByteString (ByteString)
 import           Snap.Core
 import           Snap.Snaplet
-import           Snap.Snaplet.Heist
 ------------------------------------------------------------------------------
 import           Application
 
 ------------------------------------------------------------------------------
 -- | The application's routes.
 routes :: [(ByteString, Handler App App ())]
-routes = [ ("/test",         writeBS "simplest")
-         ]
+routes = [ ("/test", writeBS "simplest") ]
 
 
 ------------------------------------------------------------------------------
 -- | The application initializer.
 app :: SnapletInit App App
 app = makeSnaplet "app" "An snaplet example application." Nothing $ do
-    h <- nestSnaplet "" heist $ heistInit "templates"
-
     addRoutes routes
-    return $ App h
+    return $ App
 
